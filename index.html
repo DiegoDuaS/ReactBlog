@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Countries Blog</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel"> 
+
+        const Header = () => {
+            const styles = {
+                backgroundColor: 'rgb(77, 155, 229)',
+                display: 'flex',
+                height: '100px',
+                width: '100%',
+                fontWeight: 'bold',
+                boxSizing: 'border-box',
+                padding: '20px 10px',
+                fontSize: '50px',
+                fontFamily: 'monospace',
+                justifyContent: 'center'
+            }
+            return (
+              <header style={styles}>
+                GLOBLOG
+              </header>
+            )
+          }
+      
+          const Footer = () => {
+            const styles = {
+      
+            }
+            return (
+              <footer style={styles}>
+                Copyright 2024 UVG
+              </footer>
+            )
+          }
+      
+          const Post = ({ country, capital_city, size, off_language, PIB}) => {
+            const styles = {
+                backgroundColor: 'rgb(83, 210, 61)',
+                paddingLeft: '50px',
+                paddingBottom: '10px',
+                borderRadius: '40px',
+                margin: '20px',
+                boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)'
+
+            }
+            return (
+              <li style={styles}>
+                <h1>{country}</h1>
+                <p>Capital City: {capital_city}</p>
+                <p>Size: {size} m<sup>2</sup></p>
+                <p>Official Language: {off_language}</p>
+                <p>PIB: ${PIB} Billion</p>
+              </li>
+            )
+          }
+      
+          const Posts = () => {
+            const styles = {
+                flexGrow: '1',
+                felxBasis: '0',
+                display: 'flex',
+                overflowY: 'auto',
+                width: '700px',
+                flexDirection: 'column',
+                listStyle: 'none'
+            }
+            const [ posts, setPosts ] = React.useState([])
+      
+            const getPosts = async () => {
+              const apiResponse = await fetch('https://api.tiburoncin.lat/22075/posts')
+              const jsonPosts = await apiResponse.json()
+              setPosts(jsonPosts)
+            }
+       
+            React.useEffect(() => {
+              getPosts()
+            }, [])
+      
+            if (posts.length === 0) {
+              return (
+                <ul style={styles}>
+                  <li>Loading...</li>
+                </ul>
+              )
+            }
+         
+            return (
+              <ul style={styles}>
+                {posts.map(({country, capital_city, size, off_language, PIB}) => <Post country={country} capital_city={capital_city} size ={size} off_language = {off_language} PIB = {PIB}/>)}   
+              </ul>
+            )
+          }
+      
+          const App = () => {
+            const styles = {
+                backgroundColor: 'rgb(175, 218, 247)',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+                width: '100vw',
+                flexDirection: 'column'
+            }
+            return (
+              <main style={styles}>
+                <Header />
+                <Posts />
+                <Footer />
+              </main>
+            )
+          }
+      
+          const root = ReactDOM.createRoot(document.getElementById('root'))
+          root.render(<App />)
+    </script>
+</body>
+</html>
