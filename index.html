@@ -19,16 +19,18 @@
 
         const Header = () => {
             const styles = {
-                backgroundColor: 'rgb(77, 155, 229)',
+                color: 'rgb(23, 18, 180)',
                 display: 'flex',
                 height: '100px',
-                width: '100%',
+                width: '70%',
                 fontWeight: 'bold',
                 boxSizing: 'border-box',
                 padding: '20px 10px',
                 fontSize: '50px',
-                fontFamily: 'monospace',
-                justifyContent: 'center'
+                fontFamily: 'Montserrat',
+                justifyContent: 'center',
+                borderBottom: '2px solid black',
+                borderBottomWidth: 'thin'
             }
             return (
               <header style={styles}>
@@ -37,9 +39,14 @@
             )
           }
       
-          const Footer = () => {
+        const Footer = () => {
             const styles = {
-      
+              fontFamily: 'monospace',
+              display: 'flex',
+              height: '50px',
+              width: '70%',
+              justifyContent: 'center',
+
             }
             return (
               <footer style={styles}>
@@ -48,26 +55,61 @@
             )
           }
       
-          const Post = ({ country, capital_city, size, off_language, PIB}) => {
+          const Post = ({ country, capital_city, size, off_language, PIB }) => {
             const styles = {
-                backgroundColor: 'rgb(83, 210, 61)',
-                paddingLeft: '50px',
+                backgroundColor: 'rgb(175, 218, 247)',
                 paddingBottom: '10px',
-                borderRadius: '40px',
+                borderRadius: '30px',
                 margin: '20px',
-                boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)'
-
-            }
+                boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
+                display: 'grid',
+                gridTemplateColumns: '1fr 4fr 1fr 4fr',
+                gridTemplateRows: 'auto auto auto',
+                gap: '10px'
+            };
+        
+            const countryStyle = {
+                color: 'rgb(23, 18, 180)',
+                fontFamily: 'Montserrat',
+                gridColumn: '1 / span 4',
+                gridRow: '1',
+                textAlign: 'center',
+                borderBottom: '2px solid black',
+                borderBottomWidth: 'thin'
+            };
+        
+            const generateImageStyle = (width, height, column, row) => ({
+                width: width,
+                height: height,
+                gridColumn: column,
+                gridRow: row,
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingLeft: '30px',
+            });
+        
+            const generateParagraphStyle = (column, row) => ({
+                gridColumn: column,
+                gridRow: row,
+                paddingLeft: '20px',
+                fontFamily: 'Montserrat'
+            });
+        
             return (
-              <li style={styles}>
-                <h1>{country}</h1>
-                <p>Capital City: {capital_city}</p>
-                <p>Size: {size} m<sup>2</sup></p>
-                <p>Official Language: {off_language}</p>
-                <p>PIB: ${PIB} Billion</p>
-              </li>
-            )
-          }
+                <li style={styles}>
+                    <h1 style={countryStyle}>{country}</h1>
+                    <img src={'./Images/capital.png'} alt="Capital City Icon" style={generateImageStyle('70%', '80%', '1', '2')} />
+                    <p style={generateParagraphStyle('2', '2')}>Capital City: {capital_city}</p>
+                    <img src={'./Images/size.png'} alt="Size Icon" style={generateImageStyle('70%', '80%', '1', '3')} />
+                    <p style={generateParagraphStyle('2', '3')}>Size: {size} m<sup>2</sup></p>
+                    <img src={'./Images/language.png'} alt="Language Icon" style={generateImageStyle('70%', '80%', '3', '2')} />
+                    <p style={generateParagraphStyle('4', '2')}>Official Language: {off_language}</p>
+                    <img src={'./Images/pib.png'} alt="PIB Icon" style={generateImageStyle('70%', '80%', '3', '3')} />
+                    <p style={generateParagraphStyle('4', '3')}>GDP: ${PIB} Billion</p>
+                </li>
+            );
+        };
+        
       
           const Posts = () => {
             const styles = {
@@ -75,6 +117,12 @@
                 felxBasis: '0',
                 display: 'flex',
                 overflowY: 'auto',
+                WebkitOverflowScrolling: 'touch',
+                scrollbarWidth: 'thin', 
+                scrollbarColor: 'rgb(252, 252, 252)', 
+                scrollbarTrackColor: 'transparent',
+                scrollbarThumbColor: 'rgb(23, 18, 180)',
+                scrollbarThumbBorderRadius: '10px',
                 width: '700px',
                 flexDirection: 'column',
                 listStyle: 'none'
@@ -108,7 +156,7 @@
       
           const App = () => {
             const styles = {
-                backgroundColor: 'rgb(175, 218, 247)',
+                backgroundColor: 'rgb(252, 252, 252)',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
