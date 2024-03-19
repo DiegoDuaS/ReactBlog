@@ -17,29 +17,32 @@
     <div id="root"></div>
     <script type="text/babel"> 
 
-        const Header = () => {
+        const Header = (props) => {
             const styles = {
-                color: 'rgb(23, 18, 180)',
+                color: 'white',
+                backgroundColor: 'rgb(47, 144, 215)',
                 display: 'flex',
                 height: '100px',
-                width: '70%',
+                width: '100%',
                 fontWeight: 'bold',
                 boxSizing: 'border-box',
                 paddingTop: '20px',
                 fontSize: '50px',
                 fontFamily: 'Montserrat',
                 justifyContent: 'center',
+                flexDirection: 'row',
             }
             return (
               <header style={styles}>
-                GLOBLOG
+                GLOBLOG  {props.children}
               </header>
             )
           }
 
-        const InformationBlock = () => {
+        const Menu = () => {
           const styles = {
             display: 'flex',
+            flexDirection: 'row',
             height: '50px',
             width: '70%',
             paddingBottom: '20px',
@@ -48,18 +51,37 @@
             fontSize: '20px',
             fontFamily: 'Montserrat',
             justifyContent: 'center',
-            borderBottom: '2px solid black',
-            borderBottomWidth: 'thin'
+            listStyleType: 'none',
+            margin: '0',
+            paddingTop: '5px'
           }
+
+          const listyles = {
+            marginLeft: '15%',
+            textAlign: 'center',
+          }
+
+          const astyles = {
+            color: 'white',
+            padding: '14px 25px',
+            textAlign: 'center',
+            textDecoration: 'none',
+            display: 'inline-block',
+            borderRadius: '30px'
+          }
+          
           return(
-            <p style={styles}>
-              Want information about countries? You found the right place!
-            </p>
+            <ul style = {styles}>
+              <li style = {listyles}><a style = {astyles} href="index.html">Home</a></li>
+              <li style = {listyles}><a style = {astyles} href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">New Post</a></li>
+              <li style = {listyles}><a style = {astyles} href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">More Information</a></li>
+            </ul>
           )
         }
       
         const Footer = () => {
             const styles = {
+              color: 'white',
               fontFamily: 'monospace',
               display: 'flex',
               height: '50px',
@@ -135,13 +157,6 @@
               flexGrow: '1',
               felxBasis: '0',
               display: 'flex',
-              overflowY: 'auto',
-              WebkitOverflowScrolling: 'touch',
-              scrollbarWidth: 'thin', 
-              scrollbarColor: 'rgb(252, 252, 252)', 
-              scrollbarTrackColor: 'transparent',
-              scrollbarThumbColor: 'rgb(23, 18, 180)',
-              scrollbarThumbBorderRadius: '10px',
               width: '800px',
               flexDirection: 'column',
               listStyle: 'none'
@@ -188,21 +203,23 @@
             </ul>
           )
         }
-      
+
           const App = () => {
             const styles = {
-                backgroundColor: 'rgb(252, 252, 252)',
+                backgroundImage: `url(./Images/worldgif.gif)`,
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                height: '100vh',
+                height: '100%',
                 width: '100vw',
-                flexDirection: 'column'
+                flexDirection: 'column',
+                overflowY: 'auto'
             }
             return (
               <main style={styles}>
-                <Header />
-                <InformationBlock />
+                <Header>
+                  <Menu/>
+                </Header>
                 <Posts />
                 <Footer />
               </main>
